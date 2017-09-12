@@ -16,11 +16,11 @@ public class Articulo {
   public Articulo() {
   }
 
-  public Articulo(int id, String titulo, String contenido, String autor) {
+  public Articulo(int id, String titulo, String contenido, Calendar fecha, String autor) {
     this.id = id;
     this.titulo = titulo;
     this.contenido = contenido;
-    this.creado = new GregorianCalendar();
+    this.creado = fecha;
     this.autor = autor;
   }
 

@@ -1,5 +1,7 @@
 package rest.servicio;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import rest.dao.BaseDeDatos;
@@ -20,6 +22,29 @@ public class ArticuloServicio {
       }
     }
     return null;
+  }
+
+  public List<Articulo> getArticuloPorAutor(String autor) {
+    List<Articulo> resultado = new ArrayList<>();
+    for (Articulo articulo : listado) {
+      if (articulo.getAutor().equalsIgnoreCase(autor)) {
+        resultado.add(articulo);
+      }
+    }
+    return resultado;
+  }
+
+  public List<Articulo> getArticuloPorFecha(int year, int month) {
+    List<Articulo> resultado = new ArrayList<>();
+    Calendar fecha = new GregorianCalendar();
+    for (Articulo articulo : listado) {
+      fecha.setTime(articulo.getCreado().getTime());
+      if (fecha.get(Calendar.YEAR) == year
+              && fecha.get(Calendar.MONTH) == month - 1) {
+        resultado.add(articulo);
+      }
+    }
+    return resultado;
   }
 
   public Articulo addArticulo(Articulo articulo) {
