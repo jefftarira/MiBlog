@@ -1,8 +1,11 @@
 package rest.modelo;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 public class Articulo {
@@ -12,6 +15,8 @@ public class Articulo {
   private String contenido;
   private Calendar creado;
   private String autor;
+
+  private List<Comentario> comentarios = new ArrayList<>();
 
   public Articulo() {
   }
@@ -62,6 +67,15 @@ public class Articulo {
 
   public void setAutor(String autor) {
     this.autor = autor;
+  }
+
+  @XmlTransient
+  public List<Comentario> getComentarios() {
+    return comentarios;
+  }
+
+  public void setComentarios(List<Comentario> comentarios) {
+    this.comentarios = comentarios;
   }
 
 }

@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import rest.modelo.Articulo;
+import rest.modelo.Comentario;
 
 public final class BaseDeDatos {
 
@@ -17,7 +18,7 @@ public final class BaseDeDatos {
     Articulo art1 = new Articulo(1, "Primer artículo", "Primer contenido", new GregorianCalendar(), "Jeff");
     Articulo art2 = new Articulo(2, "Segundo artículo", "Segundo contenido", new GregorianCalendar(2015, 4, 2), "Andrea");
     Articulo art3 = new Articulo(3, "Tercer artículo", "Tercer contenido", new GregorianCalendar(2016, 11, 24), "Churi");
-
+    art1.getComentarios().add(new Comentario(1, "Muy buen artículo", "Daniel"));
     listado.add(art1);
     listado.add(art2);
     listado.add(art3);

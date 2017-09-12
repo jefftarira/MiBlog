@@ -1,5 +1,7 @@
 package rest.recurso;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -10,7 +12,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import rest.modelo.Articulo;
 import rest.servicio.ArticuloServicio;
 
@@ -43,8 +48,15 @@ public class ArticuloRecurso {
   }
 
   @POST
-  public Articulo addArticulo(Articulo articulo) {
-    return servicio.addArticulo(articulo);
+  public Response addArticulo(Articulo articulo, @Context UriInfo uriInfo) throws URISyntaxException {
+    Articulo respuesta = servicio.addArticulo(articulo);
+    URI uri = uriInfo.getAbsolutePathBuilder()
+            .path(String.valueOf(respuesta.getId()))
+            .build();
+    
+    return Response.created(uri)
+            .entity(respuesta)
+            .build();
   }
 
   @DELETE
@@ -58,6 +70,11 @@ public class ArticuloRecurso {
   public Articulo updateArticulo(@PathParam("articuloId") int id, Articulo articulo) {
     articulo.setId(id);
     return servicio.updateArticulo(articulo);
+  }
+
+  @Path("/{articuloId}/comentarios")
+  public ComentarioRecurso getComentarios() {
+    return new ComentarioRecurso();
   }
 
 }
