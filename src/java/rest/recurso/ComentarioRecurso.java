@@ -14,18 +14,18 @@ import rest.modelo.Comentario;
 import rest.servicio.ComentarioServicio;
 
 @Path("/")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class ComentarioRecurso {
 
   ComentarioServicio servicio = new ComentarioServicio();
 
-  @GET
- 
+  @GET  
   public List<Comentario> getComentarios(@PathParam("articuloId") int articuloId) {
     return servicio.getComentarios(articuloId);
   }
 
   @GET
-  @Produces(MediaType.APPLICATION_JSON)
   @Path("/{comentarioId}")
   public Comentario getComentario(@PathParam("articuloId") int articuloId,
           @PathParam("comentarioId") int comentarioId) {
@@ -33,15 +33,12 @@ public class ComentarioRecurso {
   }
 
   @POST
-  @Produces(MediaType.APPLICATION_JSON)
-  @Consumes(MediaType.APPLICATION_JSON)
   public Comentario addComentario(@PathParam("articuloId") int articuloId,
           Comentario comentario) {
     return servicio.addComentario(articuloId, comentario);
   }
 
   @DELETE
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("/{comentarioId}")
   public void deleteComentario(@PathParam("articuloId") int articuloId,
           @PathParam("comentarioId") int comentarioId) {
@@ -49,8 +46,6 @@ public class ComentarioRecurso {
   }
 
   @PUT
-  @Produces(MediaType.APPLICATION_JSON)
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("/{comentarioId}")
   public Comentario updateComentario(@PathParam("articuloId") int articuloId,
           @PathParam("comentarioId") int comentarioId,

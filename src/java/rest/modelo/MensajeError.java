@@ -41,5 +41,4 @@ public class MensajeError {
   public void setOtraInfo(String otraInfo) {
     this.otraInfo = otraInfo;
   }
-
 }

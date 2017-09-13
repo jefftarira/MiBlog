@@ -2,6 +2,7 @@ package rest.servicio;
 
 import java.util.GregorianCalendar;
 import java.util.List;
+import rest.excepciones.DatosNoEncontradosExcepcion;
 import rest.modelo.Articulo;
 import rest.modelo.Comentario;
 
@@ -14,15 +15,20 @@ public class ComentarioServicio {
   }
   
   public Comentario getComentario(int articuloId, int comentarioId) {
+    Comentario respuesta = null;
     System.out.println("Entro a buscar comentario");
     List<Comentario> comentarios = articuloServicio.getArticulo(articuloId).getComentarios();
     for (Comentario comentario : comentarios) {
       if (comentario.getId() == comentarioId) {
         System.out.println("Se encontro comentario");
-        return comentario;
+        respuesta = comentario;
       }
     }
-    return null;
+    if(respuesta == null ){
+      throw new DatosNoEncontradosExcepcion("No se encuentra el comentario");
+    }
+    
+    return respuesta;
   }
   
   public Comentario addComentario(int articuloId, Comentario comentario) {

@@ -24,7 +24,7 @@ public class ArticuloServicio {
       }
     }
     if (respuesta == null) {
-      throw new DatosNoEncontradosExcepcion("No se encuentra el articulo");
+      throw new DatosNoEncontradosExcepcion("No se encuentra el artículo");
     }
     return respuesta;
   }
